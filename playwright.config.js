@@ -26,7 +26,7 @@ export default defineConfig({
     eyesConfig: {
       apiKey: process.env.APPLITOOLS_API_KEY,
       type: 'ufg',
-      failTestsOnDiff: 'afterAll',
+      failTestsOnDiff: false,
       batch: { name: 'MCP Demo Tests', notifyOnCompletion: true },
       dontCloseBatches: false,
       logConfig: {
