@@ -34,9 +34,11 @@ export default defineConfig({
         filename: 'applitools.log',
       },
       browsersInfo: [
-        { name: 'chrome', width: 800, height: 600 },
-        { name: 'firefox', width: 1024, height: 768 },
-        { name: 'safari', width: 1024, height: 768 },
+        { name: 'chrome', width: 1200, height: 800 },
+        { name: 'firefox', width: 1200, height: 800 },
+        { name: 'safari', width: 1200, height: 800 },
+        { name: 'edgechromium', width: 1200, height: 800 },
+        { chromeEmulationInfo: { deviceName: 'Galaxy S22 Ultra', screenOrientation: 'landscape' } }
       ],
     },
   },
