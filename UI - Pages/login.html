@@ -271,6 +271,32 @@
       z-index: 1000;
     }
     .toast.show { transform: translateX(0); }
+
+    /* Dynamic Info Section */
+    .dynamic-info {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .info-item {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-label {
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    .info-value {
+      font-family: 'Courier New', monospace;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -279,11 +305,27 @@
   <nav class="navbar">
     <a href="welcome.html" class="logo">MyApp</a>
     <div class="nav-links">
-      <a href="#" id="navHome">HommeChanged</a>
-      <a href="#" id="navAbout">Abbout</a>
+      <a href="#" id="navHome">HomeChanged</a>
+      <a href="#" id="navAbout">About</a>
       <a href="#" id="navContact">Contact</a>
     </div>
   </nav>
+
+  <!-- Dynamic Info Section -->
+  <div class="dynamic-info">
+    <div class="info-item">
+      <span class="info-label">📅 Date:</span>
+      <span class="info-value" id="currentDate">-</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">🕐 Time:</span>
+      <span class="info-value" id="currentTime">-</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">📧 Email:</span>
+      <span class="info-value" id="userEmail">chandan.jagdeesh@applitools.com</span>
+    </div>
+  </div>
 
   <!-- Login Card -->
   <div class="login-wrapper">
@@ -431,6 +473,27 @@
       e.preventDefault();
       showToast('Password reset link sent to your email');
     });
+
+    // Update dynamic date and time
+    function updateDateTime() {
+      const now = new Date();
+      
+      // Format date as: Mon, Jan 09, 2026
+      const dateOptions = { weekday: 'short', year: 'numeric', month: 'short', day: '2-digit' };
+      const formattedDate = now.toLocaleDateString('en-US', dateOptions);
+      document.getElementById('currentDate').textContent = formattedDate;
+      
+      // Format time as: HH:MM:SS AM/PM
+      const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+      const formattedTime = now.toLocaleTimeString('en-US', timeOptions);
+      document.getElementById('currentTime').textContent = formattedTime;
+    }
+    
+    // Initialize date and time on page load
+    updateDateTime();
+    
+    // Update time every second
+    setInterval(updateDateTime, 1000);
   </script>
 </body>
 </html>
