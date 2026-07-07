@@ -66,6 +66,18 @@
       color: #555;
       align-items: center;
     }
+    .header-datetime {
+      background: #f5f5f5;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 6px 40px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 24px;
+      font-size: 12px;
+      color: #888;
+      letter-spacing: 0.04em;
+    }
+    .header-datetime span { display: flex; align-items: center; gap: 5px; }
     .header-actions a {
       text-decoration: none;
       color: inherit;
@@ -283,6 +295,12 @@
 </head>
 <body>
 
+  <!-- Date & Time Bar -->
+  <div class="header-datetime">
+    <span>&#128197; <span id="liveDate"></span></span>
+    <span>&#128336; <span id="liveTime"></span></span>
+  </div>
+
   <!-- Promo Banner -->
   <div class="hero">
     Free shipping on orders over $50 &mdash; <span>Shop Now</span>
@@ -409,5 +427,14 @@
     <a href="#">Accessibility</a>
   </footer>
 
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      document.getElementById('liveDate').textContent = now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+      document.getElementById('liveTime').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  </script>
 </body>
 </html>
