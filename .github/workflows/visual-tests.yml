@@ -34,7 +34,7 @@ jobs:
 
     - name: Run visual tests
       if: steps.changed.outputs.specs != ''
-      run: npx playwright test ${{ steps.changed.outputs.specs }}
+      run: npx playwright test ${{ steps.changed.outputs.specs }} --project=chromium
       env:
         APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
         APPLITOOLS_BATCH_ID: ${{ github.sha }}
