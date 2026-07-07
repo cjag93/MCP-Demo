@@ -38,7 +38,6 @@ export default defineConfig({
         { name: 'firefox', width: 1200, height: 800 },
         { name: 'safari', width: 1200, height: 800 },
         { name: 'edgechromium', width: 1200, height: 800 },
-        { chromeEmulationInfo: { deviceName: 'Galaxy S22 Ultra', screenOrientation: 'landscape' } }
       ],
     },
   },

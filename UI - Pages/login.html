@@ -37,6 +37,22 @@
       transition: color 0.2s;
     }
     .navbar .nav-links a:hover { color: #fff; }
+    .navbar .nav-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+    }
+    .navbar .nav-info span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .navbar .nav-info .nav-email {
+      font-weight: 500;
+      color: #fff;
+    }
 
     /* Login Card */
     .login-wrapper {
@@ -283,6 +299,11 @@
       <a href="#" id="navAbout">Abbout</a>
       <a href="#" id="navContact">Contact</a>
     </div>
+    <div class="nav-info">
+      <span>&#128197; <span id="navDate"></span></span>
+      <span>&#128336; <span id="navTime"></span></span>
+      <span>&#9993;&#65039; <span class="nav-email">chandan.jagdeesh@applitools.com</span></span>
+    </div>
   </nav>
 
   <!-- Login Card -->
@@ -342,6 +363,15 @@
   </footer>
 
   <script>
+    // Live date & time in navbar
+    function updateNavDateTime() {
+      const now = new Date();
+      document.getElementById('navDate').textContent = now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+      document.getElementById('navTime').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    updateNavDateTime();
+    setInterval(updateNavDateTime, 1000);
+
     const form = document.getElementById('loginForm');
     const errorMsg = document.getElementById('errorMsg');
     const successMsg = document.getElementById('successMsg');
