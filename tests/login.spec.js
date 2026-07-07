@@ -217,7 +217,7 @@ test.describe('Login Page - Accessibility', () => {
   test('username input has associated label', async ({ page }) => {
     const label = page.locator('label[for="username"]');
     await expect(label).toBeVisible();
-    await expect(label).toHaveText('Username');
+    await expect(label).toHaveText('Usernname');
   });
 
   test('password input has associated label', async ({ page }) => {
