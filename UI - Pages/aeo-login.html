@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEO - Sign In</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-nav {
+      display: flex;
+      gap: 32px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #222;
+    }
+    .header-nav a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .header-nav a:hover { color: #c8102e; }
+
+    /* AEO Logo */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .aeo-logo {
+      width: 52px;
+      height: 52px;
+    }
+    .logo-text {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: #c8102e;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      color: #555;
+      align-items: center;
+    }
+    .header-actions a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .header-actions a:hover { color: #c8102e; }
+
+    /* Hero banner */
+    .hero {
+      background: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .hero span { color: #c8102e; font-weight: 700; }
+
+    /* Main */
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px;
+    }
+
+    .login-card {
+      background: #fff;
+      width: 420px;
+      padding: 48px 40px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .brand-mark {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .brand-mark svg {
+      width: 64px;
+      height: 64px;
+    }
+    .brand-mark .brand-name {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      color: #c8102e;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+    .brand-mark .tagline {
+      font-size: 12px;
+      color: #888;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .card-subtitle {
+      font-size: 13px;
+      color: #888;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #444;
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid #ccc;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fff;
+    }
+    .form-group input:focus { border-color: #c8102e; }
+    .form-group input::placeholder { color: #bbb; }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 12px;
+    }
+    .form-footer label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #555;
+      cursor: pointer;
+    }
+    .form-footer a {
+      color: #c8102e;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .form-footer a:hover { text-decoration: underline; }
+
+    .btn-signin {
+      width: 100%;
+      padding: 14px;
+      background: #c8102e;
+      color: #fff;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-signin:hover { background: #a50d26; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+      color: #bbb;
+      font-size: 12px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+
+    .btn-create {
+      width: 100%;
+      padding: 14px;
+      background: #fff;
+      color: #1a1a1a;
+      border: 1.5px solid #1a1a1a;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-create:hover { background: #1a1a1a; color: #fff; }
+
+    .perks {
+      margin-top: 28px;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 24px;
+    }
+    .perks-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .perks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .perk-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #444;
+    }
+    .perk-icon {
+      width: 20px;
+      height: 20px;
+      background: #c8102e;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .footer a:hover { color: #c8102e; }
+  </style>
+</head>
+<body>
+
+  <!-- Promo Banner -->
+  <div class="hero">
+    Free shipping on orders over $50 &mdash; <span>Shop Now</span>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <nav class="header-nav">
+      <a href="#">Men</a>
+      <a href="#">Women</a>
+      <a href="#">Aerie</a>
+      <a href="#">Sale</a>
+    </nav>
+
+    <a href="#" class="logo-wrap">
+      <!-- AEO Eagle SVG logo mark -->
+      <svg class="aeo-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#c8102e"/>
+        <!-- Eagle silhouette -->
+        <g fill="#fff">
+          <!-- Body -->
+          <ellipse cx="50" cy="58" rx="14" ry="18"/>
+          <!-- Head -->
+          <circle cx="50" cy="36" r="10"/>
+          <!-- Beak -->
+          <polygon points="58,36 66,33 58,40"/>
+          <!-- Left wing -->
+          <path d="M36,52 Q18,38 14,28 Q22,34 36,44 Z"/>
+          <!-- Right wing -->
+          <path d="M64,52 Q82,38 86,28 Q78,34 64,44 Z"/>
+          <!-- Tail feathers -->
+          <path d="M44,74 Q42,86 38,90 Q46,82 50,76 Q54,82 62,90 Q58,86 56,74 Z"/>
+          <!-- Eye -->
+          <circle cx="54" cy="33" r="2.5" fill="#c8102e"/>
+        </g>
+        <!-- AEO text -->
+        <text x="50" y="98" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Arial" letter-spacing="3">AEO</text>
+      </svg>
+      <span class="logo-text">American Eagle</span>
+    </a>
+
+    <div class="header-actions">
+      <a href="#">Find a Store</a>
+      <a href="#">Help</a>
+      <a href="#">&#9673; Cart (0)</a>
+    </div>
+  </header>
+
+  <!-- Login Card -->
+  <main class="main">
+    <div class="login-card">
+
+      <div class="brand-mark">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#c8102e"/>
+          <g fill="#fff">
+            <ellipse cx="50" cy="58" rx="14" ry="18"/>
+            <circle cx="50" cy="36" r="10"/>
+            <polygon points="58,36 66,33 58,40"/>
+            <path d="M36,52 Q18,38 14,28 Q22,34 36,44 Z"/>
+            <path d="M64,52 Q82,38 86,28 Q78,34 64,44 Z"/>
+            <path d="M44,74 Q42,86 38,90 Q46,82 50,76 Q54,82 62,90 Q58,86 56,74 Z"/>
+            <circle cx="54" cy="33" r="2.5" fill="#c8102e"/>
+          </g>
+        </svg>
+        <div class="brand-name">AEO</div>
+        <div class="tagline">American Eagle Outfitters</div>
+      </div>
+
+      <h1 class="card-title">Sign In</h1>
+      <p class="card-subtitle">Welcome back! Sign in to your AEO account.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password">
+        </div>
+
+        <div class="form-footer">
+          <label>
+            <input type="checkbox" id="rememberMe"> Keep me signed in
+          </label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn-signin">Sign In</button>
+      </form>
+
+      <div class="divider">or</div>
+
+      <button class="btn-create">Create an Account</button>
+
+      <div class="perks">
+        <div class="perks-title">AEO Member Benefits</div>
+        <div class="perks-list">
+          <div class="perk-item">
+            <div class="perk-icon">&#10003;</div>
+            <span>Earn points on every purchase</span>
+          </div>
+          <div class="perk-item">
+            <div class="perk-icon">&#10003;</div>
+            <span>Exclusive member discounts &amp; early access</span>
+          </div>
+          <div class="perk-item">
+            <div class="perk-icon">&#10003;</div>
+            <span>Free shipping on qualifying orders</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2026 American Eagle Outfitters &nbsp;&middot;&nbsp;
+    <a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp;
+    <a href="#">Terms of Use</a> &nbsp;&middot;&nbsp;
+    <a href="#">Accessibility</a>
+  </footer>
+
+</body>
+</html>
