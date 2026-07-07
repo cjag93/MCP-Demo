@@ -1,0 +1,48 @@
+name: Visual Tests
+on:
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'tests/**-visual.spec.js'
+      - 'UI - Pages/**'
+
+jobs:
+  visual:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps chromium
+
+    - name: Find changed visual specs
+      id: changed
+      run: |
+        FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'tests/*-visual.spec.js' | tr '\n' ' ')
+        echo "specs=$FILES" >> $GITHUB_OUTPUT
+        echo "Running visual specs: $FILES"
+
+    - name: Run visual tests
+      if: steps.changed.outputs.specs != ''
+      run: npx playwright test ${{ steps.changed.outputs.specs }}
+      env:
+        APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+        APPLITOOLS_BATCH_ID: ${{ github.sha }}
+        APPLITOOLS_BATCH_BUILD_ID: ${{ github.run_id }}
+
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: visual-report
+        path: playwright-report/
+        retention-days: 30
