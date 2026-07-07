@@ -27,7 +27,7 @@ export default defineConfig({
       apiKey: process.env.APPLITOOLS_API_KEY,
       type: 'ufg',
       failTestsOnDiff: false,
-      batch: { name: 'MCP Demo Tests', notifyOnCompletion: true },
+      batch: { name: 'MCP Demo Tests', notifyOnCompletion: false },
       dontCloseBatches: false,
       logConfig: {
         type: 'file',
