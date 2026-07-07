@@ -37,6 +37,22 @@
       transition: color 0.2s;
     }
     .navbar .nav-links a:hover { color: #fff; }
+    .navbar .nav-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+    }
+    .navbar .nav-info span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .navbar .nav-info .nav-email {
+      font-weight: 500;
+      color: #fff;
+    }
 
     /* Login Card */
     .login-wrapper {
@@ -171,7 +187,7 @@
       padding: 10px;
       border: 2px solid #e0e0e0;
       border-radius: 8px;
-      background: #fff;
+      background: #ddd4d4;
       cursor: pointer;
       font-size: 14px;
       font-weight: 500;
@@ -199,7 +215,7 @@
     }
     .message.success {
       background: #d4edda;
-      color: #155724;
+      color: #cad4cd;
       border: 1px solid #c3e6cb;
     }
 
@@ -309,6 +325,11 @@
       <a href="#" id="navAbout">About</a>
       <a href="#" id="navContact">Contact</a>
     </div>
+    <div class="nav-info">
+      <span>&#128197; <span id="navDate"></span></span>
+      <span>&#128336; <span id="navTime"></span></span>
+      <span>&#9993;&#65039; <span class="nav-email">chandan.jagdeesh@applitools.com</span></span>
+    </div>
   </nav>
 
   <!-- Dynamic Info Section -->
@@ -338,7 +359,7 @@
         <div class="message error" id="errorMsg">Not great username or password. Please try again.</div>
         <div class="message success" id="successMsg">Login succcessful! Redirecting...</div>
 
-        <div class="form-group"
+        <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" name="username" placeholder="Enter your username" required>
         </div>
@@ -384,6 +405,15 @@
   </footer>
 
   <script>
+    // Live date & time in navbar
+    function updateNavDateTime() {
+      const now = new Date();
+      document.getElementById('navDate').textContent = now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+      document.getElementById('navTime').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    updateNavDateTime();
+    setInterval(updateNavDateTime, 1000);
+
     const form = document.getElementById('loginForm');
     const errorMsg = document.getElementById('errorMsg');
     const successMsg = document.getElementById('successMsg');
